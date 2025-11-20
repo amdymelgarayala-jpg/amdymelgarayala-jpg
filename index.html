@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belleza Delicada</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #ffe6f2;
+    }
+    header {
+      background: #ff66a3;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+    }
+    nav a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      padding: 100px 20px 40px;
+    }
+    h2 {
+      color: #cc0066;
+      text-align: center;
+    }
+    .catalogo-item {
+      background: white;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    button {
+      background: #ff66a3;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #carrito {
+      background: white;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">💖 Belleza Delicada</div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#promociones">Promociones</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#catalogo">Catálogo</a>
+    </nav>
+  </header>  <section id="inicio">
+    <h2>Bienvenida a Belleza Delicada</h2>
+    <p style="text-align:center; max-width:600px; margin:auto;">Tu centro de estética ideal para realzar tu belleza con elegancia y profesionalismo.</p>
+  </section>  <section id="servicios">
+    <h2>Servicios</h2>
+    <ul>
+      <li>Peinados profesionales</li>
+      <li>Maquillaje</li>
+      <li>Uñas acrílicas y gel</li>
+      <li>Depilación</li>
+    </ul>
+  </section>  <section id="promociones">
+    <h2>Promociones</h2>
+    <p>Actualmente contamos con descuentos especiales en uñas y peinados.</p>
+  </section>  <section id="ubicacion">
+    <h2>Ubicación</h2>
+    <p>El centro de estética Belleza Delicada se encontrará en la Calle Flor de Jarajorechi, cerca de la Unidad Educativa Corina Hurtado, entre la Avenida Beni y calles conectadas a las principales avenidas de Trinidad.</p>
+  </section>  <section id="catalogo">
+    <h2>Catálogo</h2>
+    <div class="catalogo-item">
+      <h3>Peinado Elegante</h3>
+      <p>Precio: 50 Bs</p>
+      <button onclick="agregarCarrito('Peinado Elegante', 50)">Agregar al carrito</button>
+    </div>
+    <div class="catalogo-item">
+      <h3>Uñas Acrílicas</h3>
+      <p>Precio: 80 Bs</p>
+      <button onclick="agregarCarrito('Uñas Acrílicas', 80)">Agregar al carrito</button>
+    </div>
+    <div class="catalogo-item">
+      <h3>Maquillaje Profesional</h3>
+      <p>Precio: 70 Bs</p>
+      <button onclick="agregarCarrito('Maquillaje Profesional', 70)">Agregar al carrito</button>
+    </div>
+  </section>  <section id="carrito">
+    <h2>Carrito de Compras</h2>
+    <ul id="lista-carrito"></ul>
+    <button onclick="enviarWhatsApp()">Pedir por WhatsApp</button>
+  </section>  <script>
+    let carrito = [];
+
+    function agregarCarrito(nombre, precio) {
+      carrito.push({ nombre, precio });

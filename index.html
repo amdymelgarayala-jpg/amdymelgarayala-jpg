@@ -1,126 +1,311 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Belleza Delicada</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Belleza Delicada — Servicios y Citas</title>
+
   <style>
+    :root {
+      --accent: #b8486a;
+      --light-accent: #f7d7e3;
+      --bg: #fff;
+      --card: #ffffff;
+      --muted: #5f5f5f;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #ffe6f2;
+      font-family: "Inter", sans-serif;
+      background: #fff;
+      color: #222;
     }
-    header {
-      background: #ff66a3;
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      position: fixed;
+
+    /* NAV */
+    nav {
       width: 100%;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
       top: 0;
-      z-index: 1000;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      z-index: 99;
     }
-    .logo {
+
+    nav .logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 22px;
-      font-weight: bold;
-      color: white;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 18px;
     }
-    nav a {
-      margin: 0 10px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
+
+    nav img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 50%;
     }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    section {
-      padding: 100px 20px 40px;
-    }
-    h2 {
-      color: #cc0066;
-      text-align: center;
-    }
-    .catalogo-item {
-      background: white;
-      padding: 15px;
-      margin: 10px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    button {
-      background: #ff66a3;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
+
+    nav .cart-btn {
       cursor: pointer;
-      margin-top: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--light-accent);
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 2px solid var(--accent);
     }
-    #carrito {
-      background: white;
+
+    /* HEADER */
+    header {
+      padding: 40px 16px;
+      text-align: center;
+    }
+
+    header img {
+      width: 170px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: var(--accent);
+    }
+
+    p.lead {
+      margin-top: 8px;
+      color: var(--muted);
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
       padding: 20px;
-      margin: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
+
+    /* SERVICES */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    .price {
+      font-weight: 700;
+      margin-top: 6px;
+      color: var(--accent);
+    }
+
+    .btn-add {
+      margin-top: 12px;
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* CARRITO */
+    #cartPanel {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 300px;
+      height: 100%;
+      background: #fff;
+      box-shadow: -2px 0 12px rgba(0,0,0,0.15);
+      padding: 20px;
+      transition: right .3s;
+      z-index: 200;
+    }
+
+    #cartPanel.open {
+      right: 0;
+    }
+
+    #cartPanel h2 {
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    #cartItems {
+      margin-bottom: 18px;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .btn-wsp {
+      background: linear-gradient(90deg,#25D366,#128C7E);
+      padding: 10px 14px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    footer {
+      text-align: center;
+      margin: 40px 0;
+      color: #555;
+    }
+
   </style>
 </head>
-<body>
-  <header>
-    <div class="logo">💖 Belleza Delicada</div>
-    <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#promociones">Promociones</a>
-      <a href="#ubicacion">Ubicación</a>
-      <a href="#catalogo">Catálogo</a>
-    </nav>
-  </header>  <section id="inicio">
-    <h2>Bienvenida a Belleza Delicada</h2>
-    <p style="text-align:center; max-width:600px; margin:auto;">Tu centro de estética ideal para realzar tu belleza con elegancia y profesionalismo.</p>
-  </section>  <section id="servicios">
-    <h2>Servicios</h2>
-    <ul>
-      <li>Peinados profesionales</li>
-      <li>Maquillaje</li>
-      <li>Uñas acrílicas y gel</li>
-      <li>Depilación</li>
-    </ul>
-  </section>  <section id="promociones">
-    <h2>Promociones</h2>
-    <p>Actualmente contamos con descuentos especiales en uñas y peinados.</p>
-  </section>  <section id="ubicacion">
-    <h2>Ubicación</h2>
-    <p>El centro de estética Belleza Delicada se encontrará en la Calle Flor de Jarajorechi, cerca de la Unidad Educativa Corina Hurtado, entre la Avenida Beni y calles conectadas a las principales avenidas de Trinidad.</p>
-  </section>  <section id="catalogo">
-    <h2>Catálogo</h2>
-    <div class="catalogo-item">
-      <h3>Peinado Elegante</h3>
-      <p>Precio: 50 Bs</p>
-      <button onclick="agregarCarrito('Peinado Elegante', 50)">Agregar al carrito</button>
-    </div>
-    <div class="catalogo-item">
-      <h3>Uñas Acrílicas</h3>
-      <p>Precio: 80 Bs</p>
-      <button onclick="agregarCarrito('Uñas Acrílicas', 80)">Agregar al carrito</button>
-    </div>
-    <div class="catalogo-item">
-      <h3>Maquillaje Profesional</h3>
-      <p>Precio: 70 Bs</p>
-      <button onclick="agregarCarrito('Maquillaje Profesional', 70)">Agregar al carrito</button>
-    </div>
-  </section>  <section id="carrito">
-    <h2>Carrito de Compras</h2>
-    <ul id="lista-carrito"></ul>
-    <button onclick="enviarWhatsApp()">Pedir por WhatsApp</button>
-  </section>  <script>
-    let carrito = [];
 
-    function agregarCarrito(nombre, precio) {
-      carrito.push({ nombre, precio });
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">
+      <img src="IMAGE_0" alt="logo">
+      Belleza Delicada
+    </div>
+    <div class="cart-btn" onclick="toggleCart()">
+      Carrito (<span id="cartCount">0</span>)
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header>
+    <img src="IMAGE_0" alt="Logo Belleza Delicada">
+    <h1>Belleza Delicada con Anyi</h1>
+    <p class="lead">Servicios profesionales para realzar tu belleza con delicadeza.</p>
+  </header>
+
+  <!-- SERVICIOS -->
+  <main class="container">
+    <h2 style="color:var(--accent)">Servicios</h2>
+
+    <div class="services">
+
+      <div class="card">
+        <h3>Corte y peinado</h3>
+        <p>Estilizado profesional según tu tipo de rostro.</p>
+        <div class="price">Bs. 70</div>
+        <button class="btn-add" onclick="addToCart('Corte y peinado', 70)">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <h3>Manicure & Pedicure</h3>
+        <p>Cuidado completo y esmaltado profesional.</p>
+        <div class="price">Bs. 50</div>
+        <button class="btn-add" onclick="addToCart('Manicure & Pedicure', 50)">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <h3>Faciales</h3>
+        <p>Tratamientos para piel limpia, hidratada y luminosa.</p>
+        <div class="price">Bs. 70</div>
+        <button class="btn-add" onclick="addToCart('Facial', 70)">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <h3>Depilación</h3>
+        <p>Cera profesional para rostro y cuerpo.</p>
+        <div<div class="price">Bs. 60</div>
+        <button class="btn-add" onclick="addToCart('Depilación', 60)">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <h3>Maquillaje profesional</h3>
+        <p>Para eventos, bodas y sesiones fotográficas.</p>
+        <div class="price">Bs. 80</div>
+        <button class="btn-add" onclick="addToCart('Maquillaje profesional', 80)">Agregar al carrito</button>
+      </div>
+
+      <div class="card">
+        <h3>Color y tratamientos capilares</h3>
+        <p>Tintes, mechas y keratina.</p>
+        <div class="price">Bs. 100</div>
+        <button class="btn-add" onclick="addToCart('Tratamiento capilar', 100)">Agregar al carrito</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- CARRITO -->
+  <div id="cartPanel">
+    <h2>Carrito</h2>
+    <div id="cartItems"></div>
+    <a id="sendWspBtn" class="btn-wsp" target="_blank">Enviar pedido por WhatsApp</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Belleza Delicada — Todos los derechos reservados.
+  </footer>
+
+<script>
+  let cart = [];
+
+  function addToCart(name, price) {
+    cart.push({ name, price });
+    document.getElementById("cartCount").textContent = cart.length;
+    updateCart();
+  }
+
+  function toggleCart() {
+    document.getElementById("cartPanel").classList.toggle("open");
+  }
+
+  function updateCart() {
+    let html = "";
+    let total = 0;
+
+    cart.forEach(item => {
+      total += item.price;
+      html += `<p>• ${item.name} — Bs. ${item.price}</p>`;
+    });
+
+    html += `<hr><p><strong>Total: Bs. ${total}</strong></p>`;
+    document.getElementById("cartItems").innerHTML = html;
+
+    // Hora Bolivia (GMT -4)
+    const options = { timeZone: "America/La_Paz", hour: "numeric", hour12: false };
+    const hour = new Date().toLocaleString("es-BO", options);
+
+    let saludo = "";
+
+    if (hour >= 5 && hour < 12) {
+      saludo = "Buenos días, señorita. Espero que tenga un lindo inicio de jornada.";
+    } else if (hour >= 12 && hour < 18) {
+      saludo = "Buenas tardes, señorita. Espero que su día esté yendo muy bien.";
+    } else {
+      saludo = "Buenas noches, señorita. Espero que esté teniendo un descanso agradable.";
+    }
+
+    const mensaje = encodeURIComponent(
+      `${saludo}\n\nMe gustaría solicitar los siguientes servicios:\n${cart.map(i => `• ${i.name} — Bs. ${i.price}`).join("\n")}\n\nTotal: Bs. ${total}\n\nMi nombre es: `
+    );
+
+    document.getElementById("sendWspBtn").href =
+      `https://wa.me/59169847523?text=${mensaje}`;
+  }
+</script>
+
+</body>
+</html>
